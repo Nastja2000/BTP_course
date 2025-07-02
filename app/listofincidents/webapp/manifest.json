@@ -1,0 +1,117 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "mi.listofincidents",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{incidentsOverview}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.18.0",
+      "toolsId": "6d52f8c3-8b62-4c5b-aca4-26a81717616e"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/processor/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.136.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "mi.listofincidents.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "mi.listofincidents.view",
+        "async": true,
+        "viewPath": "mi.listofincidents.view"
+      },
+      "routes": [
+        {
+          "name": "RouteListOfIncidents",
+          "pattern": ":?query:",
+          "target": [
+            "TargetListOfIncidents"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetListOfIncidents": {
+          "id": "ListOfIncidents",
+          "name": "ListOfIncidents"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "mi.listofincidents.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

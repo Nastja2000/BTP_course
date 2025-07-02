@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="idCreateItemDialog"
+		title="{i18n>CreateItemBtnText}">
+		<content>
+			<f:SimpleForm id="idCreateItemForm"
+				editable="true"
+				columnsM="2"
+				columnsL="2"
+				columnsXL="2">
+				<f:content>
+					<Label id="idTitleInputLabel" text="{i18n>ItemTitle}" labelFor="idTitleInput" />
+					<Input required="true" id="idTitleInput" value="{createItemDialog>/title}" />
+					<Label id="idDescriptionInputLabel" text="{i18n>ItemDescription}" labelFor="idDescriptionInput"/>
+					<Input id="idDescriptionInput" value="{createItemDialog>/description}" />
+					<Label id="idQuantityInputlabel" text="{i18n>ItemQuantity}" labelFor="idQuantityDialogInput" />
+					<Input required="true" id="idQuantityDialogInput" value="{createItemDialog>/quantity}" />
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<footer>
+			<Toolbar>
+				<content>
+					<ToolbarSpacer />
+					<Button 
+						id="idCreateItemDialogButton"
+                        text="{i18n>CreateItemBtnText}"
+                        press=".onCreateItemByQuantity" />
+					<Button id="idCloseCreateDialogButton"
+						text="{i18n>CloseBtn}"
+						press=".closeCreateDialog"/>
+				</content>
+			</Toolbar>
+		</footer>
+	</Dialog>
+</core:FragmentDefinition>

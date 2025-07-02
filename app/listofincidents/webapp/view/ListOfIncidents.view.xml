@@ -1,0 +1,88 @@
+<mvc:View controllerName="mi.listofincidents.controller.ListOfIncidents"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <headerContent >
+			<Button id="idShareButton" icon="sap-icon://action" tooltip="Share" />
+		</headerContent>
+		<subHeader>
+			<OverflowToolbar id="idOverflowToolbar">
+                <Label id="idTitleFilterbarLabel" labelFor="idSearchField" text="{i18n>Title}"/>
+				<SearchField id="idTitleSearchField" liveChange=".onSearchTitle" width="auto"/>
+
+                <Label id="idCustomerFilterbarLabel" labelFor="idSearchField" text="{i18n>Customer}"/>
+				<SearchField id="idCustomerSearchField" liveChange=".onSearchCustomer" width="auto"/>
+			</OverflowToolbar>
+		</subHeader>
+        <content>
+			<Table
+                id="idIncidentsTable"
+                headerText="{i18n>ListOfIncidentListTitle}"
+                inset="false"
+                items="{
+                    path: '/ListOfIncidents'
+                }">
+                
+                <columns>
+                    <Column id="idIncidentIdColumn" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="idIncidentIdColumnTitle" text="{i18n>IncidentId}" />
+                    </Column>
+                    <Column id="idIncidentTitleColumn" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="idIncidentTitleColumnTitle" text="{i18n>IncidentTitle}" />
+                    </Column>
+                    <Column id="idIncidentCustomerColumn" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="idIncidentCustomerColumnTitle" text="{i18n>IncidentCustomer}" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <ObjectIdentifier title="{Id}" />
+                            <Text text="{Title}" />
+                            <Text text="{Customer_ID}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            <Table
+                id="idItemsTable"
+                inset="false"
+                items="{
+                    path: '/Items'
+                }">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <Title id="idItemTableTitle" text="{i18n>BLItemsTitle}" />
+                            <ToolbarSpacer />
+                            <Button id="idFilterTableByQuantityButton" text="{i18n>FilterTableBtnText}" type="Default" press="onFilterTableByQuantityPress" />
+                            <Button id="idCreateItemButton" text="{i18n>CreateItemBtnText}" icon="sap-icon://create" press="onCreateItemPress" />
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="idItemTitleColumn" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="idItemTitleColumnTitle" text="{i18n>ItemTitle}" />
+                    </Column>
+                    <Column id="idItemDescriptionColumn" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="idItemDescriptionColumnTitle" text="{i18n>ItemDescription}" />
+                    </Column>
+                    <Column id="idItemQuantityColumn" minScreenWidth="Tablet" demandPopin="true">
+                        <Text id="idItemQuantityColumnTitle" text="{i18n>ItemQuantity}" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <ObjectIdentifier title="{title}" />
+                            <Text text="{description}" />
+                            <Text text="{quantity}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+		</content>
+    </Page>
+</mvc:View>
