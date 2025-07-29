@@ -6,17 +6,92 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "^8",
-    "express": "^4"
+    "@cap-js/hana": "^2",
+    "@sap-cloud-sdk/connectivity": "^3.26.4",
+    "@sap-cloud-sdk/http-client": "^3.26.4",
+    "@sap-cloud-sdk/resilience": "^3.26.4",
+    "@sap-cloud-sdk/util": "^3.26.4",
+    "@sap/cds": "^9",
+    "@sap/xssec": "^4",
+    "express": "^4",
+    "npm": "^11.4.2"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1",
-    "@cap-js/cds-types": "^0.10.0"
+    "@cap-js/cds-test": "^0.4.0",
+    "@cap-js/cds-types": "^0.10.0",
+    "@cap-js/sqlite": "^2",
+    "@sap/cds-dk": ">=8",
+    "@sap/xsenv": "^5.6.1",
+    "@sap/xssec": "^4.9.0",
+    "axios": "^1.10.0",
+    "chai": "^4.5.0",
+    "chai-as-promised": "^7.1.2",
+    "chai-subset": "^1.6.0",
+    "jest": "^30.0.4"
   },
   "scripts": {
     "start": "cds-serve",
+    "start-hybrid": "cds watch --profile hybrid",
+    "test": "npx jest tests/test.js",
     "watch-incidents": "cds watch --open incidents/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-listofincidents": "cds watch --open listofincidents/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "[development]": {
+        "auth": {
+          "kind": "mocked",
+          "users": {
+            "incident.support@tester.sap.com": {
+              "password": "initial",
+              "roles": [
+                "support"
+              ]
+            },
+            "alice": {
+              "roles": [
+                "support"
+              ]
+            },
+            "bob": {
+              "roles": [
+                "support"
+              ]
+            }
+          }
+        }
+      },
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "credentials": {
+          "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+        }
+      },
+      "northwind_local": {
+        "kind": "odata",
+        "model": "srv/external/Northwind",
+        "credentials": {
+          "url": "https://services.odata.org/Northwind/Northwind.svc",
+          "headers": {
+            "User-Agent": "CAP Northwind Client"
+          }
+        }
+      },
+      "northwind_btp": {
+        "kind": "odata",
+        "credentials": {
+          "destination": "northwind-btp"
+        }
+      },
+      "html5-runtime": true,
+      "destinations": true,
+      "[production]": {
+        "db": "hana",
+        "auth": "xsuaa"
+      },
+      "workzone": true
+    }
   },
   "sapux": [
     "app/incidents"

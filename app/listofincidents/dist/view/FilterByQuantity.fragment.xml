@@ -1,0 +1,34 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		binding="{/getItemsByQuantity(...)}"
+		id="idFilterByQuantityDialog"
+		title="{i18n>FilterTableBtnText}">
+		
+		 <f:SimpleForm binding="{$Parameter}" id="idFilterItemsForm" editable="true" labelSpanS="3">
+			<Label id="idQuantityInputLabel" labelFor="idQuantityInput" text="{i18n>ItemQuantity}" />
+			<Input id="idQuantityInput" value="{quantity}"/>
+			<Label id="idFilterItemsButtonLabel" labelFor="idFilterItemsButton" text="" />
+			<Button id="idFilterItemsButton" text="{i18n>FilterBtn}" press=".onFilterItemsByQuantity" />
+		</f:SimpleForm>
+		<List id="idListOfFilteredItems" items="{value}">
+			<items>
+				<ObjectListItem
+					title="{title}"
+					number="{quantity}">
+					<attributes>
+						<ObjectAttribute text="{description}" />
+					</attributes>
+				</ObjectListItem>
+			</items>
+		</List>
+		<endButton>
+			<Button id="idCloseFilterDialogButton"
+					text="{i18n>CloseBtn}"
+					press=".closeFilterDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
